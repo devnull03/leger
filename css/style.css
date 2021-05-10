@@ -1,7 +1,9 @@
 body {
-  display: grid;
+  display: flex;
   background-color: black;
   color: white;
+  height: 100%;
+  margin: 0%;
 }
 
 .header {
@@ -23,10 +25,10 @@ body {
 }
 
 .addButton {
-  background-color: #BFAAE3;
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
+  background-color: #bfaae3;
+  width: 69px;
+  height: 69px;
+  border-radius: 34.5px;
   position: fixed;
   bottom: 10%;
   right: 0%;
@@ -50,6 +52,26 @@ footer {
   justify-content: left;
   font-size: normal;
   bottom: 0%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  margin-top: 79px;
+  margin-bottom: 79px;
+  height: 100%;
+  width: 100%;
+}
+
+.thing {
+  background-color: #4F4F4F;
+  margin: 0%;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 9px solid aqua;
+  margin: 15px;
+  margin-bottom: 10px;
+  height: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */
