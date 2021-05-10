@@ -5,6 +5,8 @@ body {
   height: 100%;
   margin: 0%;
   font-family: "Asap", sans-serif;
+  font-weight: 550;
+  user-zoom: none;
 }
 
 $frame-size: 75px;
@@ -20,18 +22,22 @@ $frame-size: 75px;
 
   font-size: $fontSize;
 }
-.header {
+header {
   @include frame(25px);
   top: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  box-shadow: 0 3px 10px rgba(24, 24, 24, 0.5);
 }
-.header p {
+header p {
   width: 100%;
   padding-left: 20px;
 }
 
 $button-size: 69px;
 .addButton {
-  background-color: #bfaae3;
+  background-color: #bfaae3; 
   width: $button-size;
   height: $button-size;
   border-radius: $button-size/2;
@@ -44,17 +50,22 @@ $button-size: 69px;
   align-items: center;
   color: black;
   font-size: 40px;
-  font-family: 'Times new roman';
+  font-family: "Times new roman";
 
-  	box-shadow: 0 5px 20px rgba(24, 24, 24, 0.5);
+  box-shadow: 0 5px 15px rgba(24, 24, 24, 0.5);
+  user-select: none;
+  transition: transform 250ms;
 
+}
+.addButton:active{
+    transform: scale(0.8);
 }
 
 footer {
   @include frame(normal);
   bottom: 0%;
   background-color: black;
-  border-top: 2px solid #212121;
+  border-top: 1px solid gray;
 }
 
 main {
@@ -73,7 +84,15 @@ main {
   margin: 0%;
   padding: 24px;
   border-radius: 10px;
-  border-top: 9px solid aqua;
+  border-top: 9px solid #CDE9FF;
   margin: 15px;
   margin-bottom: 10px;
+}
+
+.themeChanger {
+    width: 60px;
+    height: 50px;
+    background-color: white;
+    border-radius: 25px;
+    margin-right: 10px;
 }

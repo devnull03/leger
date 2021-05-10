@@ -13,18 +13,21 @@
     <title>legure</title>
   </head>
   <body>
-    <div class="header">
+    <header id="header">
       <p>Sticky Notes</p>
-    </div>
-    <main>
+      <div class="themeChanger" onclick="themeManager.switchTheme()" id="themeButton">
+      </div>
+    </header>
+    <main id="holder">
       <div class="thing">stuff</div>
       <div class="thing">more stuff</div>
       <div class="thing">
-          hmmmmmmmmm <br>
-          hmmmmmmmmm
+        hmmmmmmmmm <br />
+        hmmmmmmmmm
       </div>
     </main>
-    <div class="addButton">+</div>
-    <footer>Initial Amount</footer>
+    <div class="addButton" onclick="itemManager.addItem()" id="addButton">+</div>
+    <footer id="footer">Initial Amount</footer>
+    <script src="js/main.js"></script>
   </body>
 </html>
