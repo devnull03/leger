@@ -4,6 +4,7 @@ body {
   color: white;
   height: 100%;
   margin: 0%;
+  font-family: "Asap", sans-serif;
 }
 
 .header {
@@ -30,15 +31,16 @@ body {
   height: 69px;
   border-radius: 34.5px;
   position: fixed;
-  bottom: 10%;
+  bottom: 9%;
   right: 0%;
   margin: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: black;
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 40px;
+  font-family: "Times new roman";
+  box-shadow: 0 5px 20px rgba(24, 24, 24, 0.5);
 }
 
 footer {
@@ -52,6 +54,8 @@ footer {
   justify-content: left;
   font-size: normal;
   bottom: 0%;
+  background-color: black;
+  border-top: 2px solid #212121;
 }
 
 main {
@@ -61,17 +65,17 @@ main {
   margin-bottom: 79px;
   height: 100%;
   width: 100%;
+  padding-bottom: 100px;
 }
 
 .thing {
-  background-color: #4F4F4F;
+  background-color: #4f4f4f;
   margin: 0%;
-  padding: 20px;
+  padding: 24px;
   border-radius: 10px;
   border-top: 9px solid aqua;
   margin: 15px;
   margin-bottom: 10px;
-  height: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */
