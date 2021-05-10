@@ -1,5 +1,55 @@
 body {
   display: grid;
+  background-color: black;
+  color: white;
+}
+
+.header {
+  display: grid;
+  position: fixed;
+  left: 0%;
+  height: 75px;
+  width: 100%;
+  background-color: #212121;
+  align-items: center;
+  justify-content: left;
+  font-size: 25px;
+  top: 0%;
+}
+
+.header p {
+  width: 100%;
+  padding-left: 20px;
+}
+
+.addButton {
+  background-color: #BFAAE3;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  position: fixed;
+  bottom: 10%;
+  right: 0%;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+footer {
+  display: grid;
+  position: fixed;
+  left: 0%;
+  height: 75px;
+  width: 100%;
+  background-color: #212121;
+  align-items: center;
+  justify-content: left;
+  font-size: normal;
+  bottom: 0%;
 }
 
 /*# sourceMappingURL=style.css.map */
