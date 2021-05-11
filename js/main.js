@@ -28,6 +28,7 @@ class Theme {
         this.addButton = document.getElementById("addButton");
         this.holder = document.getElementById("holder");
         this.themeButton = document.getElementById('themeButton');
+        this.valueInputdiv = document.getElementById('valueInput');
     }
     switchTheme() {
         switch (this.currentTheme) {
@@ -60,6 +61,7 @@ class Theme {
         this.addButton.style.backgroundColor = config.get("addButtonColor");
         this.themeButton.style.backgroundColor = config.get("themeButtonColor")
         this.addButton.style.color = config.get('addButtonFontColor');
+        // this.valueInputdiv.style.backgroundColor = config.get("itemBackground");
     }
 }
 
@@ -70,6 +72,7 @@ class Items {
         this.holder = document.getElementById("holder");
         this.defaultText = "hmmmmmmmmmmmmm\nhmmmmmmmmmmmmmmm";
         this.themeManager = themeManager;
+        this.valueInputdiv = document.getElementById("valueInput")
     }
 
     addItem() {
@@ -86,6 +89,14 @@ class Items {
                 break;
         }
     }
+
+    popOut() {
+        this.valueInputdiv.style.transform = 'translateY(-190%)';
+    }
+    popIn() {
+        this.valueInputdiv.style.transform = 'translateY(190%)';
+    }
+
 }
 
 const itemManager = new Items(themeManager);
