@@ -61,7 +61,7 @@ class Theme {
         this.addButton.style.backgroundColor = config.get("addButtonColor");
         this.themeButton.style.backgroundColor = config.get("themeButtonColor")
         this.addButton.style.color = config.get('addButtonFontColor');
-        // this.valueInputdiv.style.backgroundColor = config.get("itemBackground");
+        this.valueInputdiv.style.backgroundColor = config.get("itemBackground");
     }
 }
 

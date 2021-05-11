@@ -111,10 +111,8 @@ main {
   position: fixed;
   top: 100%;
   transition: transform 0.2s ease-out;
-}
-
-.valueInput:focus {
-  transform: translateY(-190%);
+  display: grid;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

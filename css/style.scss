@@ -111,8 +111,8 @@ main {
   position: fixed;
   top: 100%;
   transition: transform 0.2s ease-out;
+
+  display: grid;
+  padding: 10px;
 }
 
-.valueInput:focus {
-  transform: translateY(-190%);
-}
