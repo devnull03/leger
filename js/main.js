@@ -31,7 +31,6 @@ class Theme {
         this.holder = document.getElementById("holder");
         this.themeButton = document.getElementById("themeButton");
         this.valueInputdiv = document.getElementById("valueInput");
-        this.initialAmountElement = document.getElementById("initialAmount");
     }
     switchTheme() {
         switch (this.currentTheme) {
@@ -64,9 +63,8 @@ class Theme {
         this.addButton.style.backgroundColor = config.get("addButtonColor");
         this.themeButton.style.backgroundColor = config.get("themeButtonColor");
         this.addButton.style.color = config.get("addButtonFontColor");
-        this.initialAmountElement.style.backgroundColor = config.get(
-            "initialAmountBackground"
-        );
+        document.getElementById("initialAmount").style.backgroundColor =
+            config.get("initialAmountBackground");
     }
 }
 
@@ -95,7 +93,6 @@ class Items {
         this.saveButton = document.getElementById("saveButton");
         this.deleteButton = document.getElementById("deleteButton");
         this.currency = "₹";
-        this.initialAmountElement = document.getElementById("initialAmount");
         this.container = document.getElementById("container");
 
         this.valueInputdivShown = false;
@@ -105,6 +102,10 @@ class Items {
     }
 
     insertItem(name, cost) {
+        if (this.initialBalance === null) {
+            alert("Initial Balance not specified");
+            return;
+        }
         const text = `${name} <br><br>${this.currency} ${cost}`;
 
         if (!this.valueInputdivShown) {
@@ -145,38 +146,42 @@ class Items {
 
     amountPopOut() {
         if (!this.initialAmountElementShown) {
-            this.initialAmountElement.innerHTML = this.amountInput;
+            console.log("ello");
+            document.getElementById("initialAmount").innerHTML =
+                this.amountInput;
             this.initialAmountElementShown = true;
+            document.getElementById("amountElement").value =
+                this.initialBalance;
         }
     }
     amountPopIn() {
-        this.initialAmountElementShown = false;
         const stuff = document.getElementById("amountElement");
         if (stuff.value.length) {
             this.initialBalance = stuff.value;
         }
-        console.log(this.initialBalance);
-        stuff.value = null;
+        // console.log(this.initialBalance);
+        const initialAmountElement = document.getElementById("initialAmount");
         if (this.initialBalance === null) {
-            this.initialAmountElement.innerHTML = `
-                    <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
-                    press to enter initial balance
-                    </p>
-            `
+            initialAmountElement.innerHTML = `
+            <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
+            press to enter initial balance
+            </p>
+            `;
         } else {
-            this.initialAmountElement.innerHTML = `
-                    <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
-                    Initial Amount ${this.currency}${this.initialBalance}
-                    </p>
+            initialAmountElement.innerHTML = `
+            <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
+            Initial Amount ${this.currency}${this.initialBalance}
+            </p>
             `;
         }
+        this.initialAmountElementShown = false;
+        console.log(this.initialAmountElementShown);
     }
 
     popOut() {
         this.valueInputdiv.style.transform = "scale(1)";
         this.valueInputdivShown = true;
         this.container.style.zIndex = 1;
-        this.amountPopIn();
     }
     popIn() {
         this.valueInputdiv.style.transform = "scale(0)";

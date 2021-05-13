@@ -44,6 +44,16 @@ footer {
     background-color: black;
     border-top: 1px solid gray;
     padding-left: 20px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+footer p{
+    font-size: 27px;
+}
+footer p::before{
+    content: " ₹2000";
 }
 
 // frame styling code end ------------------------
