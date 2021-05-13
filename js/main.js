@@ -56,7 +56,7 @@ class Theme {
         this.body.style.backgroundColor = config.get("bodyColor");
         this.body.style.color = config.get("fontColor");
 
-        let items = document.getElementsByClassName('thing');
+        let items = document.getElementsByClassName("thing");
         for (const element of items) {
             element.style.backgroundColor = config.get("itemBackground");
         }
@@ -64,7 +64,9 @@ class Theme {
         this.addButton.style.backgroundColor = config.get("addButtonColor");
         this.themeButton.style.backgroundColor = config.get("themeButtonColor");
         this.addButton.style.color = config.get("addButtonFontColor");
-        this.initialAmountElement.style.backgroundColor = config.get("initialAmountBackground");
+        this.initialAmountElement.style.backgroundColor = config.get(
+            "initialAmountBackground"
+        );
     }
 }
 
@@ -72,8 +74,16 @@ const themeManager = new Theme();
 
 class Items {
     items = [];
-    initialBalance = 0;
+    initialBalance = null;
     currentBalance = 0;
+    amountInput = `
+                    <div class="initialAmountBox">
+                    <p>₹</p>
+                    <input type="number" id="amountElement" placeholder="Initial amount"/>
+                    </div>
+                    <div id="saveButton1" onclick="itemManager.amountPopIn()">Save</div>
+ 
+`;
 
     constructor(themeManager) {
         this.holder = document.getElementById("holder");
@@ -85,9 +95,13 @@ class Items {
         this.saveButton = document.getElementById("saveButton");
         this.deleteButton = document.getElementById("deleteButton");
         this.currency = "₹";
+        this.initialAmountElement = document.getElementById("initialAmount");
+        this.container = document.getElementById("container");
 
         this.valueInputdivShown = false;
         this.valueInputdivAdded = false;
+        this.initialAmountElementShown = false;
+        this.saveButtonClicked = false;
     }
 
     insertItem(name, cost) {
@@ -124,14 +138,45 @@ class Items {
     clearAll() {
         const initialAmountElement = this.holder.children[0].outerHTML;
         console.log(initialAmountElement);
-        this.holder.innerHTML = '';
+        this.holder.innerHTML = "";
         this.holder.innerHTML = initialAmountElement;
         this.items = [];
+    }
+
+    amountPopOut() {
+        if (!this.initialAmountElementShown) {
+            this.initialAmountElement.innerHTML = this.amountInput;
+            this.initialAmountElementShown = true;
+        }
+    }
+    amountPopIn() {
+        this.initialAmountElementShown = false;
+        const stuff = document.getElementById("amountElement");
+        if (stuff.value.length) {
+            this.initialBalance = stuff.value;
+        }
+        console.log(this.initialBalance);
+        stuff.value = null;
+        if (this.initialBalance === null) {
+            this.initialAmountElement.innerHTML = `
+                    <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
+                    press to enter initial balance
+                    </p>
+            `
+        } else {
+            this.initialAmountElement.innerHTML = `
+                    <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
+                    Initial Amount ${this.currency}${this.initialBalance}
+                    </p>
+            `;
+        }
     }
 
     popOut() {
         this.valueInputdiv.style.transform = "scale(1)";
         this.valueInputdivShown = true;
+        this.container.style.zIndex = 1;
+        this.amountPopIn();
     }
     popIn() {
         this.valueInputdiv.style.transform = "scale(0)";
@@ -139,6 +184,7 @@ class Items {
         this.valueInputdivAdded = false;
         this.itemNameBox.value = null;
         this.itemCostBox.value = null;
+        this.container.style.zIndex = -1;
     }
 }
 
@@ -154,14 +200,14 @@ document.getElementById("deleteButton").addEventListener("click", (event) => {
     itemManager.popIn();
 });
 
-
-
-function testValues(amount=6, long=false) {
+function testValues(amount = 6, long = false) {
     for (let i = 0; i < amount; i++) {
         itemManager.popOut();
         itemManager.insertItem(`item ${i}`, i * 100);
     }
-    if (!long) { return };
+    if (!long) {
+        return;
+    }
     itemManager.popOut();
     itemManager.insertItem(
         "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",

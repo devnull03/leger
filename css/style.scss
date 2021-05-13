@@ -11,6 +11,8 @@ body {
     user-zoom: none;
 }
 
+// frame styling code start ------------------------
+
 $frame-size: 70px;
 @mixin frame($font-size) {
     display: grid;
@@ -21,7 +23,7 @@ $frame-size: 70px;
     background-color: #212121;
     align-items: center;
     justify-content: left;
-
+    
     font-size: $font-size;
 }
 header {
@@ -36,6 +38,15 @@ header p {
     width: 100%;
     padding-left: 20px;
 }
+footer {
+    @include frame(normal);
+    bottom: 0%;
+    background-color: black;
+    border-top: 1px solid gray;
+    padding-left: 20px;
+}
+
+// frame styling code end ------------------------
 
 $button-size: 59px;
 .addButton {
@@ -62,12 +73,6 @@ $button-size: 59px;
     transform: scale(0.8);
 }
 
-footer {
-    @include frame(normal);
-    bottom: 0%;
-    background-color: black;
-    border-top: 1px solid gray;
-}
 main {
     min-width: 100%;
 }
@@ -80,7 +85,6 @@ main {
     margin-bottom: $margins;
     height: 100%;
     width: 100%;
-    // padding-bottom: 100px;
 }
 
 $top-border-color: #cde9ff;
@@ -98,9 +102,50 @@ $top-border-color: #cde9ff;
     transition: transform 250ms;
 }
 
+$initialAmountColor: #E5F9E0;
 #initialAmount {
-    background-color: #E5F9E0;
+    background-color: $initialAmountColor;
     border-color: #AFEDA4;
+    padding: 20px;
+    padding-left: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#initialAmount #opener {
+    margin: 0%;
+}
+#initialAmount #saveButton1 {
+    font-size: 20px;
+    height: fit-content;
+    margin-top: 20px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    border: 3px solid white;
+}
+
+.initialAmountBox {
+    display: flex;
+    flex-direction: row;
+}
+.initialAmountBox p {
+    font-size: 20px;
+    border-bottom: 2px solid black;
+}
+
+#amountElement {
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    background-color: transparent;
+    font-size: 20px;
+    height: 20px;
+    width: 130px;
+    margin: 20px;
+    margin-left: 0%;
+    font-family: $main-font;
 }
 
 .themeChanger {
@@ -120,6 +165,7 @@ $top-border-color: #cde9ff;
     display: grid;
     justify-content: center;
     align-items: center;
+    z-index: -1;
 }
 $value-input-background: #e1f1ff;
 .valueInput {

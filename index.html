@@ -13,7 +13,7 @@
         <title>legure</title>
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="container">
             <div class="valueInput" id="valueInput">
                 <div class="itemInfo">
                     <input type="text" id="itemName" placeholder="item" />
@@ -38,7 +38,11 @@
                 ></div>
             </header>
             <div id="holder">
-                <div id="initialAmount"></div>
+                <div id="initialAmount" >
+                    <p id="opener" style="width:100%" onclick="itemManager.amountPopOut()">
+                    press to enter initial balance
+                    </p>
+                </div>
             </div>
             <div
                 class="addButton"
