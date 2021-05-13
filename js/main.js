@@ -6,6 +6,7 @@ class Theme {
         this.lightModeConfig.set("addButtonColor", "#7719AB");
         this.lightModeConfig.set("frameColor", "#FFFFFF");
         this.lightModeConfig.set("bodyColor", "#FBFBFB");
+        this.lightModeConfig.set("initialAmountBackground", "#E5F9E0");
         this.lightModeConfig.set("itemBackground", "#E1F1FF");
         this.lightModeConfig.set("fontColor", "black");
         this.lightModeConfig.set("addButtonFontColor", "white");
@@ -15,6 +16,7 @@ class Theme {
         this.darkModeConfig.set("addButtonColor", "#bfaae3");
         this.darkModeConfig.set("frameColor", "#212121");
         this.darkModeConfig.set("bodyColor", "black");
+        this.darkModeConfig.set("initialAmountBackground", "#4f4f4f");
         this.darkModeConfig.set("itemBackground", "#4f4f4f");
         this.darkModeConfig.set("fontColor", "white");
         this.darkModeConfig.set("addButtonFontColor", "black");
@@ -29,6 +31,7 @@ class Theme {
         this.holder = document.getElementById("holder");
         this.themeButton = document.getElementById("themeButton");
         this.valueInputdiv = document.getElementById("valueInput");
+        this.initialAmountElement = document.getElementById("initialAmount");
     }
     switchTheme() {
         switch (this.currentTheme) {
@@ -53,7 +56,7 @@ class Theme {
         this.body.style.backgroundColor = config.get("bodyColor");
         this.body.style.color = config.get("fontColor");
 
-        let items = this.holder.children;
+        let items = document.getElementsByClassName('thing');
         for (const element of items) {
             element.style.backgroundColor = config.get("itemBackground");
         }
@@ -61,6 +64,7 @@ class Theme {
         this.addButton.style.backgroundColor = config.get("addButtonColor");
         this.themeButton.style.backgroundColor = config.get("themeButtonColor");
         this.addButton.style.color = config.get("addButtonFontColor");
+        this.initialAmountElement.style.backgroundColor = config.get("initialAmountBackground");
     }
 }
 
@@ -118,7 +122,10 @@ class Items {
     }
 
     clearAll() {
+        const initialAmountElement = this.holder.children[0].outerHTML;
+        console.log(initialAmountElement);
         this.holder.innerHTML = '';
+        this.holder.innerHTML = initialAmountElement;
         this.items = [];
     }
 
@@ -146,6 +153,8 @@ document.getElementById("saveButton").addEventListener("click", (event) => {
 document.getElementById("deleteButton").addEventListener("click", (event) => {
     itemManager.popIn();
 });
+
+
 
 function testValues(amount=6, long=false) {
     for (let i = 0; i < amount; i++) {

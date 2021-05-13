@@ -83,7 +83,7 @@ main {
   width: 100%;
 }
 
-.thing {
+#initialAmount, .thing {
   background-color: #4f4f4f;
   margin: 0%;
   padding: 24px;
@@ -94,6 +94,11 @@ main {
   box-shadow: 0 1px 3px rgba(53, 53, 53, 0.5);
   word-wrap: break-word;
   transition: transform 250ms;
+}
+
+#initialAmount {
+  background-color: #E5F9E0;
+  border-color: #AFEDA4;
 }
 
 .themeChanger {
