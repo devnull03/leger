@@ -13,33 +13,48 @@
         <title>legure</title>
     </head>
     <body>
-        <header id="header">
-            <p>LEGER</p>
-            <div
-                class="themeChanger"
-                onclick="themeManager.switchTheme()"
-                id="themeButton"
-            ></div>
-        </header>
+        <div class="container">
         <div class="valueInput" id="valueInput">
-          <div class="itemInfo">
-            <input type="text" id="itemName" placeholder="item" />
-            <div class="itemCostDiv">
-                <div id="currency">₹</div>
-                <input type="number" id="itemCost" placeholder="cost" />
+            <div class="itemInfo">
+                <input type="text" id="itemName" placeholder="item" />
+                <div class="itemCostDiv">
+                    <div id="currency">₹</div>
+                    <input type="number" id="itemCost" placeholder="cost" />
+                </div>
             </div>
-          </div>
             <div class="valueInputButtons">
-              <div id="saveButton">Save</div>
-              <div id="deleteButton">Delete</div>
+                <div id="saveButton">Save</div>
+                <div id="deleteButton">Delete</div>
             </div>
         </div>
-        <main id="holder">
-        </main>
-        <div class="addButton" onclick="itemManager.popOut()" id="addButton">
+        </div>
+        <main>
+            <header id="header">
+                <p>LEGER</p>
+                <div
+                    class="themeChanger"
+                    onclick="themeManager.switchTheme()"
+                    id="themeButton"
+                ></div>
+            </header>
+            <div id="holder">
+                <!-- <div class="thing">test <br><br>₹ 1000</div>
+                <div class="thing">test <br><br>₹ 1000</div>
+                <div class="thing">test <br><br>₹ 1000</div>
+                <div class="thing">test <br><br>₹ 1000</div>
+                <div class="thing">test <br><br>₹ 1000</div>
+                <div class="thing">test <br><br>₹ 1000</div> -->
+            </div>
+            <div
+            class="addButton"
+            onclick="itemManager.popOut()"
+            id="addButton"
+            >
             +
         </div>
         <footer id="footer">Footer thing</footer>
+    </main>
         <script src="js/main.js"></script>
+        <script>themeManager.switchTheme()</script>
     </body>
 </html>

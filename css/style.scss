@@ -1,16 +1,15 @@
 $main-font: "Asap", sans-serif;
+
 body {
-    display: flex;
+    display: grid;
     background-color: black;
     color: white;
-    min-height: 100%;
+    height: 100%;
     margin: 0%;
-    min-width: 100%;
     font-family: $main-font;
     font-weight: 550;
     user-zoom: none;
 }
-html {height: 100%;}
 
 $frame-size: 70px;
 @mixin frame($font-size) {
@@ -65,14 +64,15 @@ $button-size: 59px;
 
 footer {
     @include frame(normal);
-    margin-top: auto;
-    position: relative;
-    min-width: 100%;
+    bottom: 0%;
     background-color: black;
     border-top: 1px solid gray;
 }
-
 main {
+    min-width: 100%;
+}
+
+#holder {
     display: flex;
     flex-direction: column;
     $margins: $frame-size + 4;
@@ -80,7 +80,7 @@ main {
     margin-bottom: $margins;
     height: 100%;
     width: 100%;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
 }
 
 $top-border-color: #cde9ff;
@@ -106,24 +106,33 @@ $top-border-color: #cde9ff;
     margin-right: 10px;
 }
 
-$value-input-background: #E1F1FF;
-.valueInput{
-  width: 97%;
-  margin-left: 1.5%;
-  height: 250px;
-  padding-top: 0%;
-  border-radius: 20px;
-  border-top: 15px solid $top-border-color;
-  background-color: $value-input-background;    
-  box-shadow: 0 1px 13px rgba(53, 53, 53, 0.5);
-  
-  position: fixed;
-  top: 100%;
-  transition: transform 0.2s ease-out;
+// pop up styling code start ------------------------
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.container{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+$value-input-background: #e1f1ff;
+.valueInput {
+    width: 100%;
+    height: 250px;
+    padding-top: 0%;
+    border-radius: 20px;
+    border-top: 15px solid $top-border-color;
+    background-color: $value-input-background;
+    box-shadow: 0 1px 13px rgba(53, 53, 53, 0.5);
+
+    position: relative;
+    transform: scale(0);
+    transition: transform 0.2s ease-out;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #itemName {
@@ -140,20 +149,20 @@ $value-input-background: #E1F1FF;
     outline: none;
 }
 
-.itemCostDiv{
+.itemCostDiv {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 10px;
 }
-#currency{
+#currency {
     font-size: 20px;
     color: black;
     margin-left: 10px;
     margin-right: 0px;
     margin-top: 4px;
     margin-bottom: 2px;
-    border-bottom: 2px solid black;   
+    border-bottom: 2px solid black;
 }
 #itemCost {
     width: 100px;
@@ -176,8 +185,12 @@ $value-input-background: #E1F1FF;
     display: flex;
     flex-direction: row;
 }
-#saveButton, #deleteButton {
+#saveButton,
+#deleteButton {
     border: 2px solid white;
     padding: 3px;
     margin: 3px;
 }
+
+// pop up styling code end ------------------------
+

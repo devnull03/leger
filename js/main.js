@@ -68,6 +68,8 @@ const themeManager = new Theme();
 
 class Items {
     items = [];
+    initialBalance = 0;
+    currentBalance = 0;
 
     constructor(themeManager) {
         this.holder = document.getElementById("holder");
@@ -92,7 +94,7 @@ class Items {
         } else if (this.valueInputdivAdded) {
             return;
         }
-        if ((name === '') || (cost === '')) {
+        if (name === "" || cost === "") {
             return;
         }
 
@@ -110,15 +112,22 @@ class Items {
             default:
                 break;
         }
+
+        this.items.push({ name: name, cost: parseInt(cost) });
         this.popIn();
     }
 
+    clearAll() {
+        this.holder.innerHTML = '';
+        this.items = [];
+    }
+
     popOut() {
-        this.valueInputdiv.style.transform = "translateY(-230%)";
+        this.valueInputdiv.style.transform = "scale(1)";
         this.valueInputdivShown = true;
     }
     popIn() {
-        this.valueInputdiv.style.transform = "translateY(230%)";
+        this.valueInputdiv.style.transform = "scale(0)";
         this.valueInputdivShown = false;
         this.valueInputdivAdded = false;
         this.itemNameBox.value = null;
@@ -137,3 +146,16 @@ document.getElementById("saveButton").addEventListener("click", (event) => {
 document.getElementById("deleteButton").addEventListener("click", (event) => {
     itemManager.popIn();
 });
+
+function testValues(amount=6, long=false) {
+    for (let i = 0; i < amount; i++) {
+        itemManager.popOut();
+        itemManager.insertItem(`item ${i}`, i * 100);
+    }
+    if (!long) { return };
+    itemManager.popOut();
+    itemManager.insertItem(
+        "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+        1
+    );
+}

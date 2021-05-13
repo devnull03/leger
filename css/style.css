@@ -1,17 +1,12 @@
 body {
-  display: flex;
+  display: grid;
   background-color: black;
   color: white;
-  min-height: 100%;
+  height: 100%;
   margin: 0%;
-  min-width: 100%;
   font-family: "Asap", sans-serif;
   font-weight: 550;
   user-zoom: none;
-}
-
-html {
-  height: 100%;
 }
 
 header {
@@ -70,21 +65,22 @@ footer {
   align-items: center;
   justify-content: left;
   font-size: normal;
-  margin-top: auto;
-  position: relative;
-  min-width: 100%;
+  bottom: 0%;
   background-color: black;
   border-top: 1px solid gray;
 }
 
 main {
+  min-width: 100%;
+}
+
+#holder {
   display: flex;
   flex-direction: column;
   margin-top: 74px;
   margin-bottom: 74px;
   height: 100%;
   width: 100%;
-  padding-bottom: 100px;
 }
 
 .thing {
@@ -108,17 +104,25 @@ main {
   margin-right: 10px;
 }
 
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
 .valueInput {
-  width: 97%;
-  margin-left: 1.5%;
+  width: 100%;
   height: 250px;
   padding-top: 0%;
   border-radius: 20px;
   border-top: 15px solid #cde9ff;
-  background-color: #E1F1FF;
+  background-color: #e1f1ff;
   box-shadow: 0 1px 13px rgba(53, 53, 53, 0.5);
-  position: fixed;
-  top: 100%;
+  position: relative;
+  transform: scale(0);
   transition: transform 0.2s ease-out;
   display: flex;
   flex-direction: column;
@@ -128,7 +132,7 @@ main {
 #itemName {
   border: none;
   border-bottom: 2px solid black;
-  background-color: #E1F1FF;
+  background-color: #e1f1ff;
   font-size: 24px;
   height: 30px;
   width: 300px;
@@ -165,7 +169,7 @@ main {
   margin-left: 0px;
   border: none;
   border-bottom: 2px solid black;
-  background-color: #E1F1FF;
+  background-color: #e1f1ff;
   font-family: "Asap", sans-serif;
 }
 
@@ -180,7 +184,8 @@ main {
   flex-direction: row;
 }
 
-#saveButton, #deleteButton {
+#saveButton,
+#deleteButton {
   border: 2px solid white;
   padding: 3px;
   margin: 3px;
