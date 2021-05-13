@@ -94,6 +94,7 @@ class Items {
         this.deleteButton = document.getElementById("deleteButton");
         this.currency = "₹";
         this.container = document.getElementById("container");
+        this.currentBalanceTag = document.getElementById("currentBalance");
 
         this.valueInputdivShown = false;
         this.valueInputdivAdded = false;
@@ -117,6 +118,7 @@ class Items {
             return;
         }
 
+
         switch (this.themeManager.currentTheme) {
             case "light":
                 this.holder.innerHTML += `<div class="thing" style="background-color:${this.themeManager.lightModeConfig.get(
@@ -133,7 +135,17 @@ class Items {
         }
 
         this.items.push({ name: name, cost: parseInt(cost) });
+        this.calculateBalance();
         this.popIn();
+    }
+
+    calculateBalance() {
+        let spent = 0;
+        this.items.forEach(element => {
+            spent += element.cost;
+        });
+        this.currentBalance = this.initialBalance - spent;
+        this.currentBalanceTag.innerHTML = `${this.currency}${this.currentBalance}`;
     }
 
     clearAll() {
@@ -159,7 +171,6 @@ class Items {
         if (stuff.value.length) {
             this.initialBalance = stuff.value;
         }
-        // console.log(this.initialBalance);
         const initialAmountElement = document.getElementById("initialAmount");
         if (this.initialBalance === null) {
             initialAmountElement.innerHTML = `
@@ -169,20 +180,22 @@ class Items {
             `;
         } else {
             initialAmountElement.innerHTML = `
-            <p id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
-            Initial Amount ${this.currency}${this.initialBalance}
-            </p>
+            <div id="opener" onclick="itemManager.amountPopOut()" style="width:100%">
+            <p>Initial Amount</p> <p style="margin:0%;font-size:27px">&nbsp;${this.currency}${this.initialBalance}</p>
+            </div>
             `;
         }
+        this.calculateBalance();
         this.initialAmountElementShown = false;
-        console.log(this.initialAmountElementShown);
     }
 
     popOut() {
         this.valueInputdiv.style.transform = "scale(1)";
         this.valueInputdivShown = true;
         this.container.style.zIndex = 1;
-        this.amountPopIn();
+        if (this.initialAmountElementShown) {
+            this.amountPopIn();
+        }
     }
     popIn() {
         this.valueInputdiv.style.transform = "scale(0)";
@@ -207,6 +220,11 @@ document.getElementById("deleteButton").addEventListener("click", (event) => {
 });
 
 function testValues(amount = 6, long = false) {
+
+    itemManager.amountPopOut();
+    document.getElementById("amountElement").value = 4000;
+    itemManager.amountPopIn();
+
     for (let i = 0; i < amount; i++) {
         itemManager.popOut();
         itemManager.insertItem(`item ${i}`, i * 100);

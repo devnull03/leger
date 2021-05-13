@@ -52,9 +52,9 @@ footer {
 footer p{
     font-size: 27px;
 }
-footer p::before{
-    content: " ₹2000";
-}
+// footer p::before{
+//     content: " ₹2000";
+// }
 
 // frame styling code end ------------------------
 
@@ -116,7 +116,7 @@ $initialAmountColor: #E5F9E0;
 #initialAmount {
     background-color: $initialAmountColor;
     border-color: #AFEDA4;
-    padding: 20px;
+    padding: 15px;
     padding-left: 15px;
 
     display: flex;
@@ -124,7 +124,13 @@ $initialAmountColor: #E5F9E0;
     justify-content: space-between;
 }
 #initialAmount #opener {
+    display: flex;
     margin: 0%;
+}
+#initialAmount #opener p{
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 #initialAmount #saveButton1 {
     font-size: 20px;
@@ -142,6 +148,9 @@ $initialAmountColor: #E5F9E0;
 }
 .initialAmountBox p {
     font-size: 20px;
+    padding-bottom: 0px;
+    margin-top: 0%;
+    padding-top: 19px;
     border-bottom: 2px solid black;
 }
 
