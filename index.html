@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Asap:ital@1&display=swap"
-      rel="stylesheet"
-    />
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Asap:ital@1&display=swap"
+            rel="stylesheet"
+        />
 
-    <title>legure</title>
-  </head>
-  <body>
-    <header id="header">
-      <p>Sticky Notes</p>
-      <div class="themeChanger" onclick="themeManager.switchTheme()" id="themeButton">
-      </div>
-    </header>
-    <div class="valueInput" id="valueInput">
-      <input type="text" id="itemName" >
-    </div>
-    <main id="holder">
-      <div class="thing">stuff</div>
-      <div class="thing">more stuff</div>
-      <div class="thing">
-        hmmmmmmmmm <br />
-        hmmmmmmmmm <br />
-        hmmmmmmmmm <br />
-        hmmmmmmmmm <br />
-        hmmmmmmmmm 
-      </div>
-      <div class="thing">
-        hmmmmmmmmmnmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-      </div>
-    </main>
-    <div class="addButton" onclick="itemManager.addItem()" id="addButton">+</div>
-    <footer id="footer">Initial Amount</footer>
-    <script src="js/main.js"></script>
-  </body>
+        <title>legure</title>
+    </head>
+    <body>
+        <header id="header">
+            <p>Sticky Notes</p>
+            <div
+                class="themeChanger"
+                onclick="themeManager.switchTheme()"
+                id="themeButton"
+            ></div>
+        </header>
+        <div class="valueInput" id="valueInput">
+          <div class="itemInfo">
+            <input type="text" id="itemName" placeholder="item" />
+            <div class="itemCostDiv">
+                <div id="currency">₹</div>
+                <input type="number" id="itemCost" placeholder="cost" />
+            </div>
+          </div>
+            <div class="valueInputButtons">
+              <div id="saveButton">Save</div>
+              <div id="deleteButton">Delete</div>
+            </div>
+        </div>
+        <main id="holder">
+        </main>
+        <div class="addButton" onclick="itemManager.popOut()" id="addButton">
+            +
+        </div>
+        <footer id="footer">Initial Amount</footer>
+        <script src="js/main.js"></script>
+    </body>
 </html>

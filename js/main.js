@@ -9,8 +9,8 @@ class Theme {
         this.lightModeConfig.set("itemBackground", "#E1F1FF");
         this.lightModeConfig.set("fontColor", "black");
         this.lightModeConfig.set("addButtonFontColor", "white");
-        this.lightModeConfig.set('themeButtonColor', '#212121');
-        
+        this.lightModeConfig.set("themeButtonColor", "#212121");
+
         this.darkModeConfig = new Map();
         this.darkModeConfig.set("addButtonColor", "#bfaae3");
         this.darkModeConfig.set("frameColor", "#212121");
@@ -18,7 +18,7 @@ class Theme {
         this.darkModeConfig.set("itemBackground", "#4f4f4f");
         this.darkModeConfig.set("fontColor", "white");
         this.darkModeConfig.set("addButtonFontColor", "black");
-        this.darkModeConfig.set('themeButtonColor', 'white');
+        this.darkModeConfig.set("themeButtonColor", "white");
 
         this.frame = [
             document.getElementById("header"),
@@ -27,8 +27,8 @@ class Theme {
         this.body = document.getElementsByTagName("body").item(0);
         this.addButton = document.getElementById("addButton");
         this.holder = document.getElementById("holder");
-        this.themeButton = document.getElementById('themeButton');
-        this.valueInputdiv = document.getElementById('valueInput');
+        this.themeButton = document.getElementById("themeButton");
+        this.valueInputdiv = document.getElementById("valueInput");
     }
     switchTheme() {
         switch (this.currentTheme) {
@@ -59,44 +59,81 @@ class Theme {
         }
 
         this.addButton.style.backgroundColor = config.get("addButtonColor");
-        this.themeButton.style.backgroundColor = config.get("themeButtonColor")
-        this.addButton.style.color = config.get('addButtonFontColor');
-        this.valueInputdiv.style.backgroundColor = config.get("itemBackground");
+        this.themeButton.style.backgroundColor = config.get("themeButtonColor");
+        this.addButton.style.color = config.get("addButtonFontColor");
     }
 }
 
 const themeManager = new Theme();
 
 class Items {
+    items = [];
+
     constructor(themeManager) {
         this.holder = document.getElementById("holder");
         this.defaultText = "hmmmmmmmmmmmmm\nhmmmmmmmmmmmmmmm";
         this.themeManager = themeManager;
-        this.valueInputdiv = document.getElementById("valueInput")
+        this.valueInputdiv = document.getElementById("valueInput");
+        this.itemNameBox = document.getElementById("itemName");
+        this.itemCostBox = document.getElementById("itemCost");
+        this.saveButton = document.getElementById("saveButton");
+        this.deleteButton = document.getElementById("deleteButton");
+        this.currency = "₹";
+
+        this.valueInputdivShown = false;
+        this.valueInputdivAdded = false;
     }
 
-    addItem() {
+    insertItem(name, cost) {
+        const text = `${name} <br><br>${this.currency} ${cost}`;
+
+        if (!this.valueInputdivShown) {
+            return;
+        } else if (this.valueInputdivAdded) {
+            return;
+        }
+        if ((name === '') || (cost === '')) {
+            return;
+        }
+
         switch (this.themeManager.currentTheme) {
             case "light":
                 this.holder.innerHTML += `<div class="thing" style="background-color:${this.themeManager.lightModeConfig.get(
                     "itemBackground"
-                )}">${this.defaultText}</div>`;
+                )}">${text}</div>`;
+                this.valueInputdivAdded = true;
                 break;
             case "dark":
-                this.holder.innerHTML += `<div class="thing">${this.defaultText}</div>`;
+                this.holder.innerHTML += `<div class="thing">${text}</div>`;
+                this.valueInputdivAdded = true;
                 break;
             default:
                 break;
         }
+        this.popIn();
     }
 
     popOut() {
-        this.valueInputdiv.style.transform = 'translateY(-190%)';
+        this.valueInputdiv.style.transform = "translateY(-230%)";
+        this.valueInputdivShown = true;
     }
     popIn() {
-        this.valueInputdiv.style.transform = 'translateY(190%)';
+        this.valueInputdiv.style.transform = "translateY(230%)";
+        this.valueInputdivShown = false;
+        this.valueInputdivAdded = false;
+        this.itemNameBox.value = null;
+        this.itemCostBox.value = null;
     }
-
 }
 
 const itemManager = new Items(themeManager);
+
+document.getElementById("saveButton").addEventListener("click", (event) => {
+    itemManager.insertItem(
+        document.getElementById("itemName").value,
+        document.getElementById("itemCost").value
+    );
+});
+document.getElementById("deleteButton").addEventListener("click", (event) => {
+    itemManager.popIn();
+});

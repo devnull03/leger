@@ -103,16 +103,81 @@ main {
 }
 
 .valueInput {
-  width: 100%;
-  height: 300px;
+  width: 97%;
+  margin-left: 1.5%;
+  height: 250px;
+  padding-top: 0%;
   border-radius: 20px;
-  border-top: 9px solid #cde9ff;
+  border-top: 15px solid #cde9ff;
   background-color: #E1F1FF;
+  box-shadow: 0 1px 13px rgba(53, 53, 53, 0.5);
   position: fixed;
   top: 100%;
   transition: transform 0.2s ease-out;
-  display: grid;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#itemName {
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: #E1F1FF;
+  font-size: 24px;
+  height: 30px;
+  width: 300px;
+  margin: 20px;
+  font-family: "Asap", sans-serif;
+}
+
+#itemName:focus-visible {
+  outline: none;
+}
+
+.itemCostDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+}
+
+#currency {
+  font-size: 20px;
+  color: black;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  border-bottom: 2px solid black;
+}
+
+#itemCost {
+  width: 100px;
+  height: fit-content;
+  font-size: 20px;
+  margin: 20px;
+  margin-left: 0px;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: #E1F1FF;
+  font-family: "Asap", sans-serif;
+}
+
+#itemCost:focus-visible {
+  outline: none;
+}
+
+.valueInputButtons {
+  color: black;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#saveButton, #deleteButton {
+  border: 2px solid white;
+  padding: 3px;
+  margin: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */
