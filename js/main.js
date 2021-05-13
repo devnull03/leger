@@ -182,6 +182,7 @@ class Items {
         this.valueInputdiv.style.transform = "scale(1)";
         this.valueInputdivShown = true;
         this.container.style.zIndex = 1;
+        this.amountPopIn();
     }
     popIn() {
         this.valueInputdiv.style.transform = "scale(0)";
