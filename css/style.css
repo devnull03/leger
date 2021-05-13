@@ -2,12 +2,16 @@ body {
   display: flex;
   background-color: black;
   color: white;
-  height: 100%;
+  min-height: 100%;
   margin: 0%;
-  width: 100%;
+  min-width: 100%;
   font-family: "Asap", sans-serif;
   font-weight: 550;
   user-zoom: none;
+}
+
+html {
+  height: 100%;
 }
 
 header {
@@ -66,7 +70,9 @@ footer {
   align-items: center;
   justify-content: left;
   font-size: normal;
-  bottom: 0%;
+  margin-top: auto;
+  position: relative;
+  min-width: 100%;
   background-color: black;
   border-top: 1px solid gray;
 }

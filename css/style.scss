@@ -3,13 +3,14 @@ body {
     display: flex;
     background-color: black;
     color: white;
-    height: 100%;
+    min-height: 100%;
     margin: 0%;
-    width: 100%;
+    min-width: 100%;
     font-family: $main-font;
     font-weight: 550;
     user-zoom: none;
 }
+html {height: 100%;}
 
 $frame-size: 70px;
 @mixin frame($font-size) {
@@ -64,7 +65,9 @@ $button-size: 59px;
 
 footer {
     @include frame(normal);
-    bottom: 0%;
+    margin-top: auto;
+    position: relative;
+    min-width: 100%;
     background-color: black;
     border-top: 1px solid gray;
 }
