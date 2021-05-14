@@ -102,6 +102,35 @@ class Items {
         this.saveButtonClicked = false;
     }
 
+    fetchFromLocal() {
+        this.initialBalance = JSON.parse(localStorage.getItem("initialBalance"));
+        const items = JSON.parse(localStorage.getItem("items"));
+        console.log(this.initialBalance, this.items);
+        this.refresh(items);
+    }
+
+    refresh(itemsArray) {
+        if (!(this.initialBalance === null)) {
+            this.amountPopOut();
+            document.getElementById("amountElement").value =
+                this.initialBalance;
+            this.amountPopIn();
+        }
+
+        if (!(this.items === null) | !(this.items === [])) {
+            this.clearAll();
+            for (let i = 0; i < itemsArray.length; i++) {
+
+                this.popOut();
+                this.insertItem(itemsArray[i].name, itemsArray[i].cost);
+            }
+        }
+    }
+    pushToLocal() {
+        localStorage.setItem("initialBalance", JSON.stringify(this.initialBalance));
+        localStorage.setItem("items", JSON.stringify(this.items));
+    }
+
     insertItem(name, cost) {
         if (this.initialBalance === null) {
             alert("Initial Balance not specified");
@@ -117,7 +146,6 @@ class Items {
         if (name === "" || cost === "") {
             return;
         }
-
 
         switch (this.themeManager.currentTheme) {
             case "light":
@@ -136,12 +164,13 @@ class Items {
 
         this.items.push({ name: name, cost: parseInt(cost) });
         this.calculateBalance();
+        this.pushToLocal();
         this.popIn();
     }
 
     calculateBalance() {
         let spent = 0;
-        this.items.forEach(element => {
+        this.items.forEach((element) => {
             spent += element.cost;
         });
         this.currentBalance = this.initialBalance - spent;
@@ -150,15 +179,22 @@ class Items {
 
     clearAll() {
         const initialAmountElement = this.holder.children[0].outerHTML;
-        console.log(initialAmountElement);
         this.holder.innerHTML = "";
         this.holder.innerHTML = initialAmountElement;
         this.items = [];
     }
+    reset() {
+        this.clearAll();
+        this.initialBalance = null;
+        this.amountPopOut();
+        this.amountPopIn();
+
+        localStorage.removeItem("initialBalance");
+        localStorage.removeItem("items");
+    }
 
     amountPopOut() {
         if (!this.initialAmountElementShown) {
-            console.log("ello");
             document.getElementById("initialAmount").innerHTML =
                 this.amountInput;
             this.initialAmountElementShown = true;
@@ -186,6 +222,7 @@ class Items {
             `;
         }
         this.calculateBalance();
+        this.pushToLocal();
         this.initialAmountElementShown = false;
     }
 
@@ -219,8 +256,9 @@ document.getElementById("deleteButton").addEventListener("click", (event) => {
     itemManager.popIn();
 });
 
-function testValues(amount = 6, long = false) {
+itemManager.fetchFromLocal();
 
+function testValues(amount = 6, long = false) {
     itemManager.amountPopOut();
     document.getElementById("amountElement").value = 4000;
     itemManager.amountPopIn();
