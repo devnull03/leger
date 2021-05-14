@@ -103,32 +103,47 @@ class Items {
     }
 
     fetchFromLocal() {
-        this.initialBalance = JSON.parse(localStorage.getItem("initialBalance"));
+        this.initialBalance = JSON.parse(
+            localStorage.getItem("initialBalance")
+        );
         const items = JSON.parse(localStorage.getItem("items"));
-        console.log(this.initialBalance, this.items);
-        this.refresh(items);
+        const theme = localStorage.getItem("theme");
+        console.log(this.initialBalance, items, theme);
+        this.refresh(items, theme);
     }
 
-    refresh(itemsArray) {
+    refresh(itemsArray, theme) {
         if (!(this.initialBalance === null)) {
             this.amountPopOut();
             document.getElementById("amountElement").value =
                 this.initialBalance;
             this.amountPopIn();
         }
+        console.log(
+            theme,
+            this.themeManager.currentTheme,
+            theme === this.themeManager.currentTheme
+        );
+        if (theme !== this.themeManager.currentTheme) {
+            console.log("hmmm");
+            this.themeManager.switchTheme();
+        }
 
         if (!(this.items === null) | !(this.items === [])) {
             this.clearAll();
             for (let i = 0; i < itemsArray.length; i++) {
-
                 this.popOut();
                 this.insertItem(itemsArray[i].name, itemsArray[i].cost);
             }
         }
     }
     pushToLocal() {
-        localStorage.setItem("initialBalance", JSON.stringify(this.initialBalance));
+        localStorage.setItem(
+            "initialBalance",
+            JSON.stringify(this.initialBalance)
+        );
         localStorage.setItem("items", JSON.stringify(this.items));
+        localStorage.setItem("theme", this.themeManager.currentTheme);
     }
 
     insertItem(name, cost) {
@@ -255,7 +270,11 @@ document.getElementById("saveButton").addEventListener("click", (event) => {
 document.getElementById("deleteButton").addEventListener("click", (event) => {
     itemManager.popIn();
 });
+document.getElementById("themeButton").addEventListener("click", (event) => {
+    itemManager.pushToLocal();
+});
 
+themeManager.switchTheme();
 itemManager.fetchFromLocal();
 
 function testValues(amount = 6, long = false) {
