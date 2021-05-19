@@ -75,6 +75,7 @@ $button-size: 59px;
     font-size: 40px;
     font-family: "Times new roman";
 
+    cursor: pointer;
     box-shadow: 0 5px 15px rgba(24, 24, 24, 0.5);
     user-select: none;
     transition: transform 250ms;
@@ -109,6 +110,7 @@ $top-border-color: #cde9ff;
     box-shadow: 0 1px 3px rgba(53, 53, 53, 0.5);
     word-wrap: break-word;
     
+    cursor: pointer;
     transition: transform 250ms;
 }
 
@@ -118,6 +120,7 @@ $initialAmountColor: #E5F9E0;
     border-color: #AFEDA4;
     padding: 15px;
     padding-left: 15px;
+    cursor: default;
 
     display: flex;
     flex-direction: row;
@@ -126,6 +129,7 @@ $initialAmountColor: #E5F9E0;
 #initialAmount #opener {
     display: flex;
     margin: 0%;
+    cursor: pointer;
 }
 #initialAmount #opener p{
     display: grid;
@@ -140,6 +144,7 @@ $initialAmountColor: #E5F9E0;
     display: flex;
     align-items: center;
     border: 3px solid white;
+    cursor: pointer;
 }
 
 .initialAmountBox {
@@ -173,6 +178,7 @@ $initialAmountColor: #E5F9E0;
     background-color: white;
     border-radius: 25px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 // pop up styling code start ------------------------
@@ -260,6 +266,7 @@ $value-input-background: #e1f1ff;
     border: 2px solid white;
     padding: 3px;
     margin: 3px;
+    cursor: pointer;
 }
 
 // pop up styling code end ------------------------
