@@ -105,6 +105,18 @@ main {
   transition: transform 250ms;
 }
 
+.thing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.thing p {
+  margin: 0%;
+  padding: 0%;
+  word-wrap: break-word;
+}
+
 #initialAmount {
   background-color: #E5F9E0;
   border-color: #AFEDA4;
