@@ -9,22 +9,27 @@ var __values = (this && this.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var Theme;
-(function (Theme) {
-    Theme[Theme["dark"] = 0] = "dark";
-    Theme[Theme["light"] = 1] = "light";
-})(Theme || (Theme = {}));
+var lightModeBackground;
+(function (lightModeBackground) {
+    lightModeBackground["AQUA"] = "#CDE9FF";
+    lightModeBackground["GREEN"] = "#AFEDA4";
+    lightModeBackground["YELLOW"] = "#FEF2AD";
+    lightModeBackground["PINK"] = "#FECCE5";
+    lightModeBackground["LAVENDER"] = "#E0B4FF";
+    lightModeBackground["GRAY"] = "#CCCCCC";
+    lightModeBackground["BLACK"] = "#3D3D3D";
+})(lightModeBackground || (lightModeBackground = {}));
 var ThemeManager = /** @class */ (function () {
     function ThemeManager() {
     }
     ThemeManager.switchTheme = function () {
         switch (this.currentTheme) {
-            case Theme.dark:
-                this.currentTheme = Theme.light;
+            case "dark":
+                this.currentTheme = "light";
                 this.changeTheme(this.lightModeConfig);
                 break;
-            case Theme.light:
-                this.currentTheme = Theme.dark;
+            case "light":
+                this.currentTheme = "dark";
                 this.changeTheme(this.darkModeConfig);
                 break;
             default:
@@ -44,10 +49,10 @@ var ThemeManager = /** @class */ (function () {
                 var element = items_1_1.value;
                 console.log(element);
                 var id = element.id;
-                if ((this.currentTheme === Theme.light) && !(id === "initialAmount")) {
-                    // console.log(ThingHolder.allItems.get(element.id), ThingHolder.allItems, element.id);
+                if ((this.currentTheme === "light") && !(id === "initialAmount")) {
+                    console.log(ThingHolder.allItems.get(element.id), ThingHolder.allItems, element.id);
                     element.style.backgroundColor =
-                        lightModeBackground.get(ThingHolder.allItems.get(element.id).color);
+                        ThingHolder.allItems.get(element.id).color;
                 }
                 else {
                     element.style.backgroundColor =
@@ -68,7 +73,7 @@ var ThemeManager = /** @class */ (function () {
         document.getElementById("initialAmount").style.backgroundColor =
             config.initialAmountBackground;
     };
-    ThemeManager.currentTheme = Theme.dark;
+    ThemeManager.currentTheme = "dark";
     ThemeManager.lightModeConfig = {
         addButtonColor: "#7719AB",
         frameColor: "#FFFFFF",
@@ -100,7 +105,3 @@ var ThemeManager = /** @class */ (function () {
     ThemeManager.valueInputdiv = document.getElementById("valueInput");
     return ThemeManager;
 }());
-ThemeManager.switchTheme();
-ThemeManager.themeButton.addEventListener('click', function (event) {
-    ThemeManager.switchTheme();
-});

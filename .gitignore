@@ -1,4 +1,3 @@
 .prettierrc
-testing/test.html
-testing/test.js
 /*.jpg
+testing/*

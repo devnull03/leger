@@ -35,28 +35,29 @@
                 <p>LEGER</p>
                 <div
                     class="themeChanger"
-                    onclick="themeManager.switchTheme()"
                     id="themeButton"
                 ></div>
+                    <!-- onclick="themeManager.switchTheme()" -->
             </header>
             <div id="holder">
                 <div id="initialAmount" >
-                    <p id="opener" style="width:100%" onclick="itemManager.amountPopOut()">
+                    <p id="opener" style="width:100%" onclick="InitialAmountInput.amountPopOut()">
                     press to enter initial balance
                     </p>
                 </div>
             </div>
             <div
                 class="addButton"
-                onclick="itemManager.popOut()"
                 id="addButton"
-            >
+                >
+                <!-- onclick="itemManager.popOut()" -->
                 +
             </div>
             <footer id="footer">remaining balance &nbsp;<p id="currentBalance"></p></footer>
         </main>
-        <script src="js/main.js"></script>  <!-- To be repelaced and deleted -->
+        <!-- <script src="js/main.js"></script>  To be repelaced and deleted -->
 
+        <script src="js/leger.js"></script>
         <script src="js/theme.js"></script>
         <script src="js/thingObject.js"></script>
         <script src="js/inputDialog.js"></script>

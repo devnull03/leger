@@ -80,7 +80,6 @@ class Items {
                     <input type="number" id="amountElement" placeholder="Initial amount"/>
                     </div>
                     <div id="saveButton1" onclick="itemManager.amountPopIn()">Save</div>
- 
 `;
 
     constructor(themeManager) {
