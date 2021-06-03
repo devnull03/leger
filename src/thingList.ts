@@ -12,6 +12,7 @@ class ThingHolder {
         this.holder.appendChild(
             newThing.HtmlElement
         );
+        Leger.updateBalance();
     }
     static get allItems(): Map<string, Thing> {
         return Leger.allItems;

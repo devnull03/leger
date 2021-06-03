@@ -5,6 +5,7 @@ var ThingHolder = /** @class */ (function () {
         var newThing = new Thing(data.name, data.price, TrimColors.BLACK);
         Leger.allItems.set(newThing.date.getTime().toString(), newThing);
         this.holder.appendChild(newThing.HtmlElement);
+        Leger.updateBalance();
     };
     Object.defineProperty(ThingHolder, "allItems", {
         get: function () {
