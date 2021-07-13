@@ -45,18 +45,14 @@ class Thing {
         }
         this.element.style.borderColor = this.color;
         this.element.id = this.id;
-        this.element.onclick = this.test;
+        this.element.onclick = this.openToEdit;
 
         let p = document.createElement("p");
-        p.innerHTML = `${name} <br><br>${new Intl.NumberFormat(
-            navigator.language || window.navigator.language,
-            {
-                style: "currency",
-                currency: "INR",
-            }
-        ).format(this.price)}`;
+        p.className = "nameAndPrice";
+        p.innerHTML = `${name} <br><br>${Leger.currencyFormater.format(this.price)}`;
         this.element.appendChild(p);
         p = document.createElement("p");
+        p.className = "date"
         p.style.fontSize = "10px";
         p.innerHTML = this.date.toDateString();
         this.element.appendChild(p);
@@ -66,10 +62,33 @@ class Thing {
         return this.element;
     }
 
-    test(): void {
-        document.getElementById(this.id).style.background = 'white';
+    set Name(name: string) {
+        this.name = name;
+        document.getElementById(this.id).getElementsByClassName("nameAndPrice").item(0).innerHTML = `${name} <br><br>${Leger.currencyFormater.format(this.price)}`;
+    }
+    set Price(price: number) {
+        this.price = price;
+        document.getElementById(this.id).getElementsByClassName("nameAndPrice").item(0).innerHTML = `${this.name} <br><br>${Leger.currencyFormater.format(price)}`;
+    }
+    set Date(date: Date) {
+        this.date = date;
+        document.getElementById(this.id).getElementsByClassName("date").item(0).innerHTML = date.toDateString();
+    }
+
+    openToEdit(): void {
+        Leger.inputPurpose = Purpose.edit;
+        Leger.currentEditing = this;
+        InputDialog.popOut();
+    }
+
+    edit(data: InputValues): void {
+        this.Name = data.name;
+        this.Price = data.price;
+        this.Date = new Date();
     }
 }
+
+
 
 
 class InitialAmountInput {

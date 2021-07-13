@@ -4,7 +4,7 @@ class ThingHolder {
 
 
     static creatNewItem(data: InputValues): void {
-        let newThing: Thing = new Thing(data.name, data.price, TrimColors.BLACK);
+        let newThing: Thing = new Thing(data.name, data.price, TrimColors.LAVENDER);
         Leger.allItems.set(
             newThing.date.getTime().toString(),
             newThing

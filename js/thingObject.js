@@ -33,14 +33,13 @@ var Thing = /** @class */ (function () {
         }
         this.element.style.borderColor = this.color;
         this.element.id = this.id;
-        this.element.onclick = this.test;
+        this.element.onclick = this.openToEdit;
         var p = document.createElement("p");
-        p.innerHTML = name + " <br><br>" + new Intl.NumberFormat(navigator.language || window.navigator.language, {
-            style: "currency",
-            currency: "INR",
-        }).format(this.price);
+        p.className = "nameAndPrice";
+        p.innerHTML = name + " <br><br>" + Leger.currencyFormater.format(this.price);
         this.element.appendChild(p);
         p = document.createElement("p");
+        p.className = "date";
         p.style.fontSize = "10px";
         p.innerHTML = this.date.toDateString();
         this.element.appendChild(p);
@@ -52,8 +51,39 @@ var Thing = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Thing.prototype.test = function () {
-        document.getElementById(this.id).style.background = 'white';
+    Object.defineProperty(Thing.prototype, "Name", {
+        set: function (name) {
+            this.name = name;
+            document.getElementById(this.id).getElementsByClassName("nameAndPrice").item(0).innerHTML = name + " <br><br>" + Leger.currencyFormater.format(this.price);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Thing.prototype, "Price", {
+        set: function (price) {
+            this.price = price;
+            document.getElementById(this.id).getElementsByClassName("nameAndPrice").item(0).innerHTML = this.name + " <br><br>" + Leger.currencyFormater.format(price);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Thing.prototype, "Date", {
+        set: function (date) {
+            this.date = date;
+            document.getElementById(this.id).getElementsByClassName("date").item(0).innerHTML = date.toDateString();
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Thing.prototype.openToEdit = function () {
+        Leger.inputPurpose = Purpose.edit;
+        Leger.currentEditing = this;
+        InputDialog.popOut();
+    };
+    Thing.prototype.edit = function (data) {
+        this.Name = data.name;
+        this.Price = data.price;
+        this.Date = new Date();
     };
     return Thing;
 }());

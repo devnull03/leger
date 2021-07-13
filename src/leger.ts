@@ -11,7 +11,7 @@ class Leger {
     static allItems: Map<string, Thing> = new Map();
 
     static inputPurpose: Purpose.edit | Purpose.new = Purpose.new;
-    static currentEditing: HTMLElement;
+    static currentEditing: Thing;
     static currencyFormater: Intl.NumberFormat = new Intl.NumberFormat(
         navigator.language || window.navigator.language,
         {

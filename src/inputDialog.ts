@@ -53,7 +53,8 @@ document.getElementById("saveButton").addEventListener("click", (event) => {
             break;
         }
         case Purpose.edit: {
-            
+            Leger.currentEditing.edit(InputDialog.getInput());
+            Leger.inputPurpose = Purpose.new;
             break;
         }
         default:

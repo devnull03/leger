@@ -48,6 +48,8 @@ document.getElementById("saveButton").addEventListener("click", function (event)
             break;
         }
         case Purpose.edit: {
+            Leger.currentEditing.edit(InputDialog.getInput());
+            Leger.inputPurpose = Purpose.new;
             break;
         }
         default:
