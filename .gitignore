@@ -1,3 +1,5 @@
 .prettierrc
 /*.jpg
 testing/*
+node_modules
+old code/
