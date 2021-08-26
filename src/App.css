@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Asap:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Asap:ital@1&display=swap");
 
 * {
   font-family: "Asap", sans-serif;
@@ -6,7 +6,7 @@
 
 body {
   display: grid;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   color: black;
   height: 100%;
   margin: 0%;
@@ -57,7 +57,7 @@ footer p {
 }
 
 .addButton {
-  background-color: #7719AB;
+  background-color: #7719ab;
   width: 59px;
   height: 59px;
   border-radius: 29.5px;
@@ -94,8 +94,9 @@ main {
   width: 100%;
 }
 
-#initialAmount, .thing {
-  background-color: #E1F1FF;
+#initialAmount,
+.thing {
+  background-color: #e1f1ff;
   margin: 0%;
   padding: 24px;
   border-radius: 10px;
@@ -121,8 +122,8 @@ main {
 }
 
 #initialAmount {
-  background-color: #E5F9E0;
-  border-color: #AFEDA4;
+  background-color: #e5f9e0;
+  border-color: #afeda4;
   padding: 15px;
   padding-left: 15px;
   cursor: default;
@@ -202,8 +203,9 @@ main {
 
 .valueInput {
   width: 90%;
-  height: 250px;
+  height: 69vw;
   padding-top: 0%;
+  padding-left: 3vw;
   border-radius: 20px;
   border-top: 15px solid #c6e7ff;
   background-color: #e1f1ff;
@@ -212,7 +214,8 @@ main {
   transition: transform 0.2s ease-out;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  font-size: 6vw;
 
   left: 50%;
   top: 50%;
@@ -223,11 +226,11 @@ main {
   border: none;
   border-bottom: 2px solid black;
   background-color: #e1f1ff;
-  font-size: 24px;
   height: 30px;
-  width: 300px;
+  width: 40vw;
   margin: 20px;
   font-family: "Asap", sans-serif;
+  font-size: inherit;
 }
 
 #itemName:focus-visible {
@@ -242,10 +245,10 @@ main {
 }
 
 #currency {
-  font-size: 20px;
   color: black;
   margin-left: 10px;
   margin-right: 0px;
+  font-size: inherit;
   margin-top: 4px;
   margin-bottom: 2px;
   border-bottom: 2px solid black;
@@ -254,12 +257,12 @@ main {
 #itemCost {
   width: 100px;
   height: fit-content;
-  font-size: 20px;
   margin: 20px;
   margin-left: 0px;
   border: none;
   border-bottom: 2px solid black;
   background-color: #e1f1ff;
+  font-size: inherit;
   font-family: "Asap", sans-serif;
 }
 
@@ -272,12 +275,15 @@ main {
   margin: 20px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 #saveButton,
 #deleteButton {
   border: 2px solid white;
-  padding: 3px;
-  margin: 3px;
+  border-radius: 10px;
+  font-size: inherit;
+  padding: 5px;
+  margin: 7px;
   cursor: pointer;
 }
