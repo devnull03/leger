@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { InputDialog } from "./InputDialog";
 
-function App() {
+const App: React.FC = () => {
+  const [pressed, setPressed] = useState<string>('n');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      {(pressed === 'y') && <InputDialog />}
+    <main>
+      <header id="header">
+        <p>LEGER</p>
+        <div className="themeChanger" id="themeButton"></div>
       </header>
-    </div>
+      <div id="holder">
+        <div id="initialAmount">
+          <p id="opener">press to enter initial balance</p>
+        </div>
+      </div>
+      <div
+              className="addButton"
+              id="addButton"
+              onClick={() => {
+                  setPressed((pressed === 'n')? 'y': 'n');
+                  console.log('hmmmmmm');
+              }}
+      >
+        +
+      </div>
+      <footer id="footer">
+        remaining balance &nbsp;<p id="currentBalance"></p>
+      </footer>
+    </main>
+</div>
   );
 }
 
