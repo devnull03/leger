@@ -6,10 +6,13 @@ import { InputDialog } from "./InputDialog";
 export const App: React.FC = () => {
     const [pressed, setPressed] = useState<"y" | "n">("n");
     const [pressPurpose, setPressPurpose] = useState<"new" | "edit">("new");
-    const [initialAmount, setInitialAmount] = useState<number>();
+    const [initialAmount, setInitialAmount] = useState<number | null>(null);
     const [amountInputOpen, setAmountInputOpen] = useState<"y" | "n">("n");
-    const [tempAmount, setTempAmount] = useState<number>();
+    const [tempAmount, setTempAmount] = useState<number | null>(null);
 
+    useEffect(() => {
+        // setInitialAmount(4000);
+    }, [])
 
     return (
         <div className="App">
@@ -50,10 +53,10 @@ export const App: React.FC = () => {
                                         )
                                     }
                                     autoFocus
-                                    onBlur={() => {
-                                        setAmountInputOpen('n');
-                                        
-                                    }}
+                                    // onBlur={() => {
+                                    //     setAmountInputOpen('n');
+                                    //     setTempAmount(null);
+                                    // }}
                                 />
                             </div>
                             <div
@@ -61,6 +64,7 @@ export const App: React.FC = () => {
                                 onClick={() => {
                                     setInitialAmount(tempAmount);
                                     setAmountInputOpen("n");
+                                    setTempAmount(null);
                                 }}
                             >
                                 Save
