@@ -5,7 +5,7 @@ export interface Info {
     date: Date;
     color: number;
 }
-export const setItem = (info: Info) => {
+export const setItem = (info: Info): void => {
     try {
         const itemListRaw: string | null = localStorage.getItem("items");
         let itemList: Array<Info>;
@@ -15,17 +15,15 @@ export const setItem = (info: Info) => {
             info.id = latestKey;
             itemList[latestKey] = info;
 
-            console.log(info);
+            // console.log(info);
 
             localStorage.setItem("items", JSON.stringify(itemList));
         } else {
             info.id = 0;
             localStorage.setItem("items", JSON.stringify([info]));
         }
-
-        return [1, null] as const;
     } catch (error) {
-        return [0, error] as const;
+        console.log(error);
     }
 };
 
@@ -39,5 +37,27 @@ export const getAllItems = (): Array<Info> => {
         }
     } catch (error) {
         return [];
+    }
+};
+
+export const setMoney = (money: number): void => {
+    try {
+        localStorage.setItem("initialMoney", money.toString());
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getMoney = (): number | null => {
+    try {
+        const raw = localStorage.getItem("initialMoney");
+        if (raw) {
+            return Number.parseFloat(raw);
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.log(error);
+        return null;
     }
 };

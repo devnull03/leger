@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
-import { getAllItems, Info, setItem } from "./Database";
+import { getAllItems, getMoney, Info, setItem, setMoney } from "./Database";
 
 const Colors = [
     { borderColor: "#CDE9FF", backgroundColor: "#E1F1FF", name: "AQUA" },
@@ -16,20 +16,29 @@ const Colors = [
 const App: React.FC = () => {
     const [pressed, setPressed] = useState<"y" | "n">("n");
     const [pressPurpose, setPressPurpose] = useState<"new" | "edit">("new");
-    const [initialAmount, setInitialAmount] = useState<number | null>(null);
+    const [initialAmount, setInitialAmount] = useState<number | null>(
+        getMoney()
+    );
     const [amountInputOpen, setAmountInputOpen] = useState<"y" | "n">("n");
     const [tempAmount, setTempAmount] = useState<number>();
-    const [allItems, setAllItems] = useState<Array<Info>>([]);
-    const updateList = () => setAllItems(getAllItems());
+    const [allItems, setAllItems] = useState<Array<Info>>(getAllItems());
+
+    const [remainingMoney, setRemainingMoney] = useState<number | null>(null);
+    const updateList = () => {
+        setAllItems(getAllItems());
+    };
+
     useEffect(() => {
-        updateList();
-    }, [pressed]);
+        initialAmount && setMoney(initialAmount);
+        let temp: number = 0;
+        allItems.forEach((element) => {
+            temp += element.cost;
+        });
+        initialAmount && setRemainingMoney(initialAmount - temp);
+    }, [initialAmount, allItems]);
 
     const [itemName, setItemName] = useState<string>("");
     const [itemCost, setItemCost] = useState<string>("");
-    // useEffect(() => {
-    //     setAllItems();
-    // }, [])
 
     return (
         <div className="App">
@@ -44,6 +53,7 @@ const App: React.FC = () => {
                             }}
                             placeholder="item"
                             value={itemName}
+                            autoComplete="off"
                         />
                         <div className="itemCostDiv">
                             <div id="currency">₹</div>
@@ -55,6 +65,7 @@ const App: React.FC = () => {
                                 }}
                                 value={itemCost}
                                 placeholder="cost"
+                                autoComplete="off"
                             />
                         </div>
                     </div>
@@ -68,11 +79,9 @@ const App: React.FC = () => {
                                     date: new Date(),
                                     color: Math.floor(Math.random() * 7),
                                 };
-                                itemName &&
-                                    itemCost &&
-                                    setItem(info) &&
-                                    setPressed("n") &&
-                                    updateList();
+                                itemName && itemCost && setItem(info);
+                                setPressed("n");
+                                updateList();
                             }}
                         >
                             Save
@@ -93,7 +102,7 @@ const App: React.FC = () => {
             <main>
                 <header id="header">
                     <p>LEGER</p>
-                    <div className="themeChanger" id="themeButton"></div>
+                    {/* <div className="themeChanger" id="themeButton"></div> */}
                 </header>
                 <div id="holder">
                     {/* Initial amount element start */}
@@ -129,6 +138,7 @@ const App: React.FC = () => {
                                         )
                                     }
                                     autoFocus
+                                    autoComplete="off"
                                 />
                             </div>
                             <div
@@ -136,6 +146,7 @@ const App: React.FC = () => {
                                 onClick={() => {
                                     tempAmount && setInitialAmount(tempAmount);
                                     setAmountInputOpen("n");
+                                    updateList();
                                 }}
                             >
                                 Save
@@ -194,7 +205,8 @@ const App: React.FC = () => {
                     +
                 </div>
                 <footer id="footer">
-                    remaining balance &nbsp;<p id="currentBalance"></p>
+                    remaining balance &nbsp;
+                    <p id="currentBalance">₹{remainingMoney}</p>
                 </footer>
             </main>
         </div>
