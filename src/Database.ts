@@ -1,26 +1,26 @@
 export interface Info {
+    id?: number;
     name: string;
     cost: number;
     date: Date;
+    color: number;
 }
 export const setItem = (info: Info) => {
     try {
         const itemListRaw: string | null = localStorage.getItem("items");
-        let itemList;
+        let itemList: Array<Info>;
         if (itemListRaw) {
             itemList = JSON.parse(itemListRaw);
-            const latestKey: number = Object.keys(itemList).length;
-            console.log(latestKey);
-            
+            const latestKey: number = itemList.length;
+            info.id = latestKey;
             itemList[latestKey] = info;
-            localStorage.setItem("items", JSON.stringify(itemList))
+
+            console.log(info);
+
+            localStorage.setItem("items", JSON.stringify(itemList));
         } else {
-            localStorage.setItem(
-                "items",
-                JSON.stringify({
-                    0: info,
-                })
-            );
+            info.id = 0;
+            localStorage.setItem("items", JSON.stringify([info]));
         }
 
         return [1, null] as const;
@@ -29,7 +29,15 @@ export const setItem = (info: Info) => {
     }
 };
 
-// export const useGetAllItems = () => {
-//     try {
-//     } catch (error) {}
-// };
+export const getAllItems = (): Array<Info> => {
+    try {
+        const itemListRaw = localStorage.getItem("items");
+        if (itemListRaw) {
+            return JSON.parse(itemListRaw);
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+};

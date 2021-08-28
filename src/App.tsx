@@ -1,29 +1,103 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
-import { InputDialog } from "./InputDialog";
+import { getAllItems, Info, setItem } from "./Database";
 
-export const App: React.FC = () => {
+const Colors = [
+    { borderColor: "#CDE9FF", backgroundColor: "#E1F1FF", name: "AQUA" },
+    { borderColor: "#AFEDA4", backgroundColor: "#E5F9E0", name: "GREEN" },
+    { borderColor: "#FEF2AD", backgroundColor: "#FFF7E2", name: "YELLOW" },
+    { borderColor: "#FECCE5", backgroundColor: "#FFE5F2", name: "PINK" },
+    { borderColor: "#E0B4FF", backgroundColor: "#F2E6FE", name: "LAVENDER" },
+    { borderColor: "#CCCCCC", backgroundColor: "#F9F9F9", name: "GRAY" },
+    // { trim: "#3D3D3D", background: "#4F4F4F", name: "BLACK" },
+];
+
+const App: React.FC = () => {
     const [pressed, setPressed] = useState<"y" | "n">("n");
     const [pressPurpose, setPressPurpose] = useState<"new" | "edit">("new");
     const [initialAmount, setInitialAmount] = useState<number | null>(null);
     const [amountInputOpen, setAmountInputOpen] = useState<"y" | "n">("n");
-    const [tempAmount, setTempAmount] = useState<number | null>(null);
-
+    const [tempAmount, setTempAmount] = useState<number>();
+    const [allItems, setAllItems] = useState<Array<Info>>([]);
+    const updateList = () => setAllItems(getAllItems());
     useEffect(() => {
-        // setInitialAmount(4000);
-    }, [])
+        updateList();
+    }, [pressed]);
+
+    const [itemName, setItemName] = useState<string>("");
+    const [itemCost, setItemCost] = useState<string>("");
+    // useEffect(() => {
+    //     setAllItems();
+    // }, [])
 
     return (
         <div className="App">
-            {pressed === "y" && <InputDialog purpose={pressPurpose} />}
+            {pressed === "y" && (
+                <div className="valueInput">
+                    <div className="itemInfo">
+                        <input
+                            type="text"
+                            id="itemName"
+                            onChange={(event) => {
+                                setItemName(event.target.value);
+                            }}
+                            placeholder="item"
+                            value={itemName}
+                        />
+                        <div className="itemCostDiv">
+                            <div id="currency">₹</div>
+                            <input
+                                type="number"
+                                id="itemCost"
+                                onChange={(event) => {
+                                    setItemCost(event.target.value);
+                                }}
+                                value={itemCost}
+                                placeholder="cost"
+                            />
+                        </div>
+                    </div>
+                    <div className="valueInputButtons">
+                        <div
+                            id="saveButton"
+                            onClick={() => {
+                                const info: Info = {
+                                    name: itemName,
+                                    cost: Number.parseFloat(itemCost),
+                                    date: new Date(),
+                                    color: Math.floor(Math.random() * 7),
+                                };
+                                itemName &&
+                                    itemCost &&
+                                    setItem(info) &&
+                                    setPressed("n") &&
+                                    updateList();
+                            }}
+                        >
+                            Save
+                        </div>
+                        {pressPurpose === "edit" && (
+                            <div
+                                id="deleteButton"
+                                onClick={() => {
+                                    setPressed("n");
+                                }}
+                            >
+                                Delete
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
             <main>
                 <header id="header">
                     <p>LEGER</p>
                     <div className="themeChanger" id="themeButton"></div>
                 </header>
                 <div id="holder">
-                    {!initialAmount && (amountInputOpen === "n") && (
+                    {/* Initial amount element start */}
+                    {!initialAmount && amountInputOpen === "n" && (
                         <div id="initialAmount">
                             <p
                                 id="opener"
@@ -46,32 +120,29 @@ export const App: React.FC = () => {
                                     id="amountElement"
                                     placeholder="Initial amount"
                                     defaultValue={initialAmount?.toString()}
-                                    value={tempAmount?.toString()}
+                                    value={tempAmount}
                                     onChange={(e) =>
                                         setTempAmount(
-                                            Number.parseFloat(e.target.value)
+                                            Number.parseFloat(
+                                                e.target.value.toString()
+                                            )
                                         )
                                     }
                                     autoFocus
-                                    // onBlur={() => {
-                                    //     setAmountInputOpen('n');
-                                    //     setTempAmount(null);
-                                    // }}
                                 />
                             </div>
                             <div
                                 id="saveButton1"
                                 onClick={() => {
-                                    setInitialAmount(tempAmount);
+                                    tempAmount && setInitialAmount(tempAmount);
                                     setAmountInputOpen("n");
-                                    setTempAmount(null);
                                 }}
                             >
                                 Save
                             </div>
                         </div>
                     )}
-                    {initialAmount && (amountInputOpen === "n") && (
+                    {initialAmount && amountInputOpen === "n" && (
                         <div id="initialAmount">
                             <div
                                 id="opener"
@@ -82,10 +153,35 @@ export const App: React.FC = () => {
                                 }
                             >
                                 <p>Initial Amount</p>
-                                <p>&nbsp;₹{initialAmount}</p>
+                                <p
+                                    style={{
+                                        margin: "0%",
+                                        fontSize: "27px",
+                                    }}
+                                >
+                                    &nbsp;₹{initialAmount}
+                                </p>
                             </div>
                         </div>
                     )}
+                    {/* Initial amount element end */}
+                    {/* <Thing name="test" cost={90} date={new Date()} color={3} /> */}
+                    {allItems.map((info) => (
+                        <div
+                            className="thing"
+                            style={Colors[info.color]}
+                            key={info.id}
+                        >
+                            {/* {console.log(info)} */}
+                            <p className="nameAndPrice">
+                                {info.name} <br />
+                                <br />₹{info.cost}
+                            </p>
+                            <p className="date" style={{ fontSize: "10px" }}>
+                                {new Date(info.date).toDateString()}
+                            </p>
+                        </div>
+                    ))}
                 </div>
                 <div
                     className="addButton"
@@ -104,3 +200,5 @@ export const App: React.FC = () => {
         </div>
     );
 };
+
+export default App;
