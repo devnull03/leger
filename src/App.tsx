@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
-import { deleteItem, getAllItems, getMoney, Info, setItem, setMoney } from "./Database";
+import {
+    deleteItem,
+    getAllItems,
+    getMoney,
+    Info,
+    setItem,
+    setMoney,
+} from "./Database";
 
 const Colors = [
     { borderColor: "#CDE9FF", backgroundColor: "#E1F1FF", name: "AQUA" },
@@ -109,11 +116,12 @@ const App: React.FC = () => {
                         >
                             Save
                         </div>
-                        {pressPurpose.type === "edit" &&  (
+                        {pressPurpose.type === "edit" && (
                             <div
                                 id="deleteButton"
                                 onClick={() => {
-                                    pressPurpose.payload && deleteItem(pressPurpose.payload)
+                                    pressPurpose.payload &&
+                                        deleteItem(pressPurpose.payload);
                                     setPressed("n");
                                     updateList();
                                 }}
@@ -234,6 +242,8 @@ const App: React.FC = () => {
                     onClick={() => {
                         setPressed(pressed === "n" ? "y" : "n");
                         setPressPurpose({ type: "new" });
+                        setItemName("");
+                        setItemCost("");
                     }}
                 >
                     +
