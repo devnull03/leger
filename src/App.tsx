@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
-import { getAllItems, getMoney, Info, setItem, setMoney } from "./Database";
+import { deleteItem, getAllItems, getMoney, Info, setItem, setMoney } from "./Database";
 
 const Colors = [
     { borderColor: "#CDE9FF", backgroundColor: "#E1F1FF", name: "AQUA" },
@@ -13,9 +13,14 @@ const Colors = [
     // { trim: "#3D3D3D", background: "#4F4F4F", name: "BLACK" },
 ];
 
+interface Purpose {
+    type: "new" | "edit";
+    payload?: Info | null;
+}
+
 const App: React.FC = () => {
     const [pressed, setPressed] = useState<"y" | "n">("n");
-    const [pressPurpose, setPressPurpose] = useState<"new" | "edit">("new");
+    const [pressPurpose, setPressPurpose] = useState<Purpose>({ type: "new" });
     const [initialAmount, setInitialAmount] = useState<number | null>(
         getMoney()
     );
@@ -44,6 +49,9 @@ const App: React.FC = () => {
         <div className="App">
             {pressed === "y" && (
                 <div className="valueInput">
+                    {/* {pressPurpose.type === "edit" &&
+                        pressPurpose.payload &&
+                        editPurpose(pressPurpose.payload)} */}
                     <div className="itemInfo">
                         <input
                             type="text"
@@ -73,24 +81,41 @@ const App: React.FC = () => {
                         <div
                             id="saveButton"
                             onClick={() => {
-                                const info: Info = {
-                                    name: itemName,
-                                    cost: Number.parseFloat(itemCost),
-                                    date: new Date(),
-                                    color: Math.floor(Math.random() * 7),
-                                };
-                                itemName && itemCost && setItem(info);
-                                setPressed("n");
-                                updateList();
+                                if (pressPurpose.type === "new") {
+                                    const info: Info = {
+                                        name: itemName,
+                                        cost: Number.parseFloat(itemCost),
+                                        date: new Date(),
+                                        color: Math.floor(Math.random() * 7),
+                                    };
+                                    itemName && itemCost && setItem(info);
+                                    setPressed("n");
+                                    updateList();
+                                } else {
+                                    if (pressPurpose.payload) {
+                                        const info: Info = {
+                                            name: itemName,
+                                            cost: Number.parseFloat(itemCost),
+                                            date: pressPurpose.payload.date,
+                                            color: pressPurpose.payload.color,
+                                            id: pressPurpose.payload.id,
+                                        };
+                                        itemName && itemCost && setItem(info);
+                                        setPressed("n");
+                                        updateList();
+                                    }
+                                }
                             }}
                         >
                             Save
                         </div>
-                        {pressPurpose === "edit" && (
+                        {pressPurpose.type === "edit" &&  (
                             <div
                                 id="deleteButton"
                                 onClick={() => {
+                                    pressPurpose.payload && deleteItem(pressPurpose.payload)
                                     setPressed("n");
+                                    updateList();
                                 }}
                             >
                                 Delete
@@ -99,6 +124,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
             )}
+
             <main>
                 <header id="header">
                     <p>LEGER</p>
@@ -182,8 +208,16 @@ const App: React.FC = () => {
                             className="thing"
                             style={Colors[info.color]}
                             key={info.id}
+                            onClick={() => {
+                                setPressPurpose({
+                                    type: "edit",
+                                    payload: info,
+                                });
+                                setItemName(info.name);
+                                setItemCost(info.cost.toString());
+                                setPressed("y");
+                            }}
                         >
-                            {/* {console.log(info)} */}
                             <p className="nameAndPrice">
                                 {info.name} <br />
                                 <br />₹{info.cost}
@@ -199,7 +233,7 @@ const App: React.FC = () => {
                     id="addButton"
                     onClick={() => {
                         setPressed(pressed === "n" ? "y" : "n");
-                        setPressPurpose("new");
+                        setPressPurpose({ type: "new" });
                     }}
                 >
                     +
